@@ -1,21 +1,17 @@
 import ProductList from "@/components/shared/product/list";
-import { Button } from "@/components/ui/button";
-import sampleData from "@/db/sample-data";
+import { getLatestProducts } from "@/lib/actions/product.actions";
+import { ModProduct } from "@/types";
 
 export const metadata = {
   title: "Home",
 };
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
 const HomePage = async () => {
-  console.log(sampleData)
-  await delay(1000);
+  const latestProducts = (await getLatestProducts()) as ModProduct[];
+
   return (
     <>
-      Pro store
-      <Button>GGoo</Button>
-      <ProductList data={sampleData.products} title="products" limit={4}/>
+      <ProductList data={latestProducts} title="products" limit={4} />
     </>
   );
 };
