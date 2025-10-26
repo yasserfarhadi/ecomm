@@ -3,22 +3,22 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signInWithCredentials } from "@/lib/actions/user.actions";
+import { signUpUser } from "@/lib/actions/user.actions";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
-const SignInForm = () => {
-  const [data, action] = useActionState(signInWithCredentials, {
+const SignUpForm = () => {
+  const [data, action] = useActionState(signUpUser, {
     success: false,
     message: "",
   });
-  const SignInButton = () => {
+  const SignUpButton = () => {
     const { pending } = useFormStatus();
     return (
       <Button disabled={pending} className="w-full" variant="default">
-        {pending ? "Signing In..." : "Sign In"}
+        {pending ? "Submitting..." : "Create Account"}
       </Button>
     );
   };
@@ -28,6 +28,17 @@ const SignInForm = () => {
     <form action={action}>
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-6">
+        <div className="space-y-1">
+          <Label htmlFor="name">Name</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            defaultValue=""
+          />
+        </div>
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
           <Input
@@ -50,16 +61,29 @@ const SignInForm = () => {
             defaultValue=""
           />
         </div>
+        <div className="space-y-1">
+          <Label htmlFor="confirmPassword">Confirm Password</Label>
+          <Input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            required
+            autoComplete="confirmPassword"
+            defaultValue=""
+          />
+        </div>
         <div>
-          <SignInButton />
+          <SignUpButton />
         </div>
         {data && !data.success && (
-          <div className="text-center text-destructive">{data.message}</div>
+          <div className="text-center text-destructive whitespace-pre-line">
+            {data.message}.
+          </div>
         )}
         <div className="text-sm text-center text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <Link href="/sign-up" target="_self" className="link">
-            Sign Up
+          Already have an account?{" "}
+          <Link href="/sign-in" target="_self" className="link">
+            Sign In
           </Link>
         </div>
       </div>
@@ -67,4 +91,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

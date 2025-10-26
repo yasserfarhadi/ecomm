@@ -9,6 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import UserButton from "./user-button";
 
 const Nav = () => (
   <>
@@ -18,11 +19,7 @@ const Nav = () => (
         <ShoppingCartIcon /> Cart
       </Link>
     </Button>
-    <Button asChild>
-      <Link href="/sign-in">
-        <UserIcon /> Sign In
-      </Link>
-    </Button>
+    <UserButton />
   </>
 );
 
@@ -42,7 +39,7 @@ const Menu = () => {
             <div className="p-5 flex flex-col items-start gap-5">
               <Nav />
             </div>
-          <SheetDescription></SheetDescription>
+            <SheetDescription></SheetDescription>
           </SheetContent>
         </Sheet>
       </nav>

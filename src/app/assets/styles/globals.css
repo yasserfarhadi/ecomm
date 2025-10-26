@@ -209,3 +209,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+[data-sonner-toast] button {
+  background-color: var(--primary) !important;
+}
+[data-sonner-toast] button:hover {
+  background-color: var(--color-gray-800) !important;
+}
+
+
+
+html.dark {
+
+[data-sonner-toast] button {
+  background-color: var(--color-gray-) !important;
+
+}
+[data-sonner-toast] button:hover {
+  background-color: var(--color-white) !important;
+}
+
+
+} 
